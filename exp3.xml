@@ -1,0 +1,76 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="exp3" class="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="11.0.1">
+    </property>
+    <property name="DE Director" class="ptolemy.domains.de.kernel.DEDirector">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[10.0, 5.0]">
+        </property>
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={1186, 613, 936, 683}, maximized=false}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[700, 520]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="0.8000000000000007">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{201.29177135678404, 146.64125314070355}">
+    </property>
+    <entity name="PoissonClock" class="ptolemy.actor.lib.PoissonClock">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[90.0, 185.0]">
+        </property>
+    </entity>
+    <entity name="HistogramPlotter" class="ptolemy.actor.lib.gui.HistogramPlotter">
+        <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={1408, 790, 524, 687}, maximized=false}">
+        </property>
+        <property name="_plotSize" class="ptolemy.actor.gui.SizeAttribute" value="[500, 588]">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[580.0, 170.0]">
+        </property>
+        <configure>
+<?plotml <!DOCTYPE plot PUBLIC "-//UC Berkeley//DTD PlotML 1//EN"
+"http://ptolemy.eecs.berkeley.edu/xml/dtd/PlotML_1.dtd">
+<plot>
+<title>HistogramPlotter</title>
+<xRange min="0.5" max="14.0"/>
+<yRange min="0.0" max="251454.0"/>
+<barGraph width="0.5" offset="0.15"/>
+<bin width="1.0" offset="0.5"/>
+</plot>?>
+        </configure>
+    </entity>
+    <entity name="Previous" class="ptolemy.domains.de.lib.Previous">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[330.0, 245.0]">
+        </property>
+    </entity>
+    <entity name="AddSubtract" class="ptolemy.actor.lib.AddSubtract">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[435.0, 170.0]">
+        </property>
+    </entity>
+    <entity name="CurrentTime" class="ptolemy.actor.lib.CurrentTime">
+        <doc>Output the current time.</doc>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[205.0, 180.0]">
+        </property>
+    </entity>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="-1">
+        </property>
+        <vertex name="vertex1" value="[280.0, 180.0]">
+        </vertex>
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="PoissonClock.output" relation="relation"/>
+    <link port="HistogramPlotter.input" relation="relation2"/>
+    <link port="Previous.input" relation="relation4"/>
+    <link port="Previous.output" relation="relation3"/>
+    <link port="AddSubtract.plus" relation="relation4"/>
+    <link port="AddSubtract.minus" relation="relation3"/>
+    <link port="AddSubtract.output" relation="relation2"/>
+    <link port="CurrentTime.output" relation="relation4"/>
+    <link port="CurrentTime.trigger" relation="relation"/>
+</entity>
